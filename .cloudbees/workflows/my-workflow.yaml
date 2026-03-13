@@ -1,16 +1,43 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
-name: My workflow
+name: Subhradeep Workflow
 on:
   push:
     branches:
       - "**"
   workflow_dispatch:
 jobs:
-  build:
+  Regular:
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: |
           echo "hello world"
+
+  Sidecar:
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: testdb
+    steps:
+      - name: Wait for Postgres and run smoke
+        uses: docker://postgres:15-alpine
+        env:
+          PGPASSWORD: postgres
+        shell: sh
+        run: |
+          until pg_isready -h localhost -p 5432 -U postgres; do sleep 1; done
+          echo "postgres ready"
+          psql -h localhost -U postgres -d testdb -c "SELECT 1"
+          echo "integration smoke passed"
+
+  Custom-Job-Manual-Approval:
+    delegates: cloudbees-io/manual-approval/custom-job.yml@v1
+    with:
+      approvers: ""
+      instructions: "Ready to continue?"
+      disallowLaunchByUser: false
