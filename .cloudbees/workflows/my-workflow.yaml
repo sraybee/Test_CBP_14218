@@ -39,5 +39,5 @@ jobs:
     delegates: cloudbees-io/manual-approval/custom-job.yml@v1
     with:
       approvers: ""
-      instructions: "Ready to continue?"
+      instructions: "Ready to continue now?"
       disallowLaunchByUser: false
