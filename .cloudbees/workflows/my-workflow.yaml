@@ -1,6 +1,6 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
-name: Subhradeep Workflow, Monday Before QA Deploy
+name: Subhradeep Workflow, Monday After QA Deploy, IST 5:22 PM Now
 on:
   push:
     branches:
