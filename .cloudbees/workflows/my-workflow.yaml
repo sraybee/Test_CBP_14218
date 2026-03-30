@@ -1,6 +1,6 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
-name: Subhradeep Workflow, Friday 12:45 PM IST, 27th March
+name: Subhradeep Workflow, Monday 30th March
 on:
   push:
     branches:
