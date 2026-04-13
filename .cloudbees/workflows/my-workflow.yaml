@@ -1,6 +1,6 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
-name: Random Test
+name: Just A Random Test
 on:
   push:
     branches:
